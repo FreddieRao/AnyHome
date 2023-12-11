@@ -1,2 +1,357 @@
-<h1>AnyHome: Open-Vocabulary Generation of Structured and Textured 3D Homes</h1>
-<p>Coming Soon...</p>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script> 
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+
+<style type="text/css">
+	body {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		font-weight:300;
+		font-size:18px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 1100px;
+	}
+	
+	h1 {
+		font-size:32px;
+		font-weight:300;
+	}
+	
+	.disclaimerbox {
+		background-color: #eee;		
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+		padding: 20px;
+	}
+
+	video.header-vid {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.header-img {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.rounded {
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	a:link,a:visited
+	{
+		color: #1367a7;
+		text-decoration: none;
+	}
+	a:hover {
+		color: #208799;
+	}
+	
+	td.dl-link {
+		height: 160px;
+		text-align: center;
+		font-size: 22px;
+	}
+	
+	.layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+		15px 15px 0 0px #fff, /* The fourth layer */
+		15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+		20px 20px 0 0px #fff, /* The fifth layer */
+		20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+		25px 25px 0 0px #fff, /* The fifth layer */
+		25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+	.paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35); /* The top layer shadow */
+
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+
+	.layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+		margin-top: 5px;
+		margin-left: 10px;
+		margin-right: 30px;
+		margin-bottom: 5px;
+	}
+	
+	.vert-cent {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	hr
+	{
+		border: 0;
+		height: 1px;
+		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	}
+</style>
+
+<html>
+<head>
+	<title>AnyHome: Open-Vocabulary Generation of Structured and Textured 3D Homes</title>
+	<meta property="og:image" content="resources/teaser.jpg"/> <!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/ if you update and want to force Facebook to rescrape. -->
+	<meta property="og:title" content="AnyHome: Open-Vocabulary Generation of Structured and Textured 3D Homes." />
+	<meta property="og:description" content="We introduce AnyHome, a framework that translates open-vocabulary descriptions, ranging from simple labels to elaborate paragraphs, into well-structured and textured 3D indoor scenes at a house-scale. Inspired by cognition theories, AnyHome employs an amodal structured representation to capture 3D spatial cues from textual narratives and then uses egocentric inpainting to enrich these scenes. To this end, we begin by using specially designed template prompts for Large Language Models (LLMs), which enable precise control over the textual input. We then utilize intermediate representations to maintain the spatial structure's consistency, ensuring that the 3D scenes align closely with the textual description. Then, we apply a Score Distillation Sampling process to refine the placement of objects. Lastly, an egocentric inpainting process is incorporated to enhance the realism and appearance of the scenes. AnyHome stands out due to its hierarchical structured representation combined with the versatility of open-vocabulary text interpretation. This allows for extensive customization of indoor scenes at various levels of granularity. We demonstrate that AnyHome can reliably generate a range of diverse indoor scenes, characterized by their detailed spatial structures and textures, all corresponding to the free-form textual inputs." />
+
+	<!-- Get from Google Analytics -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src=""></script> 
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-75863369-6');
+	</script>
+</head>
+
+<body>
+	<br>
+	<center>
+		<span style="font-size:36px">AnyHome: Open-Vocabulary Generation of <br>Structured and Textured 3D Homes</span>
+		<table align=center width=1000px>
+			<table align=center width=1000px>
+				<tr>
+					<td align=center width=210px>
+						<center>
+							<span style="font-size:22px"><a href="#">Zehao Wen*</a></span>
+						</center>
+					</td>
+					<td align=center width=210px>
+						<center>
+							<span style="font-size:22px"><a href="#">Zichen Liu*</a></span>
+						</center>
+					</td>
+					<td align=center width=210px>
+						<center>
+							<span style="font-size:22px"><a href="https://cs.brown.edu/people/ssrinath/">Srinath Sridhar</a></span>
+						</center>
+					</td>
+					<td align=center width=210px>
+						<center>
+							<span style="font-size:22px"><a href="https://freddierao.github.io/">Rao Fu*†</a></span>
+						</center>
+					</td>
+				</tr>
+				<tr>
+					<td align=center width=210px>
+						<center>
+							
+						</center>
+					</td>
+					<td align=center width=210px>
+						<center>
+							*Equal Contribution
+						</center>
+					</td>
+					<td align=center width=210px>
+						<center>
+							†Corresponding Author
+						</center>
+					</td>
+				</tr>
+				<tr>
+					<td align=center width=210px>
+						<center>
+						</center>
+					</td>
+					<td align=center width=210px>
+						<center>
+							
+						</center>
+					</td>
+				</tr>
+			</table>
+			<table align=center width=250px>
+				<tr>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:24px"><a href='arxiv'>[Preprint]</a></span>
+						</center>
+					</td>
+				</tr>
+			</table>
+		</table>
+	</center>
+
+	<center>
+		<table align=center width=1000px>
+			<tr>
+				<td width=600px>
+					<center>
+						<img class="round" style="width:1000px" src="./resources/teaser.jpg"/>
+					</center>
+				</td>
+			</tr>
+		</table>
+	</center>
+
+	<hr>
+
+	<table align=center width=1000px>
+		<center><h1>Abstract</h1></center>
+		We introduce AnyHome, a framework that translates open-vocabulary descriptions, ranging from simple labels to elaborate paragraphs, into well-structured and textured 3D indoor scenes at a house-scale. Inspired by cognition theories, AnyHome employs an amodal structured representation to capture 3D spatial cues from textual narratives and then uses egocentric inpainting to enrich these scenes. To this end, we begin by using specially designed template prompts for Large Language Models (LLMs), which enable precise control over the textual input. We then utilize intermediate representations to maintain the spatial structure's consistency, ensuring that the 3D scenes align closely with the textual description. Then, we apply a Score Distillation Sampling process to refine the placement of objects. Lastly, an egocentric inpainting process is incorporated to enhance the realism and appearance of the scenes. AnyHome stands out due to its hierarchical structured representation combined with the versatility of open-vocabulary text interpretation. This allows for extensive customization of indoor scenes at various levels of granularity. We demonstrate that AnyHome can reliably generate a range of diverse indoor scenes, characterized by their detailed spatial structures and textures, all corresponding to the free-form textual inputs.
+		<tr>
+			<br>
+			<br>
+			<td><center>
+				<video autoplay loop muted width="450px">
+				<source src="./resources/results/layout.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+				</video>
+			</center></td>
+			<td><center>
+				<video autoplay loop muted width="450px">
+				<source src="./resources/results/inpaint.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+				</video>
+			</center></td>
+		</tr>
+		<tr>
+			<td align=center width=450px>
+				<center>
+					<span style="font-size:18px">Structure generation using amodal structured representation.</span>
+				</center>
+			</td>
+			<td align=center width=450px>
+				<center>
+					<span style="font-size:18px">Egocentric exploration of the textured scene.</span>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<!-- <hr>
+	<center><h1>Talk</h1></center>
+	<p align="center">
+		<iframe width="660" height="395" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen align="center"></iframe>
+	</p>
+
+	<table align=center width=800px>
+		<br>
+		<tr>
+			<center>
+				<span style="font-size:28px"><a href=''>[Slides]</a>
+				</span>
+			</center>
+		</tr>
+	</table> -->
+
+	<hr>
+	<center><h1>Results: Open-Vocabulary Generation</h1></center>
+	We show open-vocabulary generation results, including bird-eye view(left), egocentric views(middle), and egocentric trajectory(right). AnyHome comprehends and extends user's textual inputs, and produces structured scene with realistic texture. It can create a serene and culturally rich environment("Japanese tea house"), synthesize unique house types("cat cafe"), and render a more dramatic and stylized ambiance("haunted house").
+	<table style="width:100%">
+		<tr>
+			<td><center><img src="./resources/results/results.jpg" width="1000px" /></center></td>
+		</tr>
+
+	</table>
+	<br>
+	<hr>
+	<center><h1>Results: Open-Vocabulary Editing</h1></center>
+	Examples showcase the capability to modify room types, layouts, object appearances, and overall design through free-form user input. AnyHome also supports comprehensive style alterations and sequential edits, all made possible by its hierarchical structured geometric representation and robust text controllability.
+	<table style="width:100%">
+		<tr>
+			<td><center><img src="./resources/results/edit.jpg" width="1000px" /></center></td>
+	</table>
+
+	<br>
+
+	<hr>
+	<center><h1>Method</h1></center>
+
+	<table align=center width=1000px>
+		<tr>
+			<td align=center width=1000px>
+				<center>
+					<td><img class="round" style="width:1000px" src="./resources/method_diagram.jpg"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+
+	<table align=center width=900px>
+		<center>
+			<tr>
+				<td>
+					<br>
+					<span style="font-size:18px"> Taking a free-form textual input, our pipeline generates house-scale scenes by: i) comprehending and elaborating user textual input via querying a LLM with modulated prompts; ii) converting textual descriptions into structured geometry using intermediate representations; iii) employing a SDS process with a differentiable renderer to refine object layouts egocentrically; and iv) applying depth-conditioned texture in-painting for texture generation.</span>
+				</td>
+			</tr>
+		</center>
+	</table>
+	<br>
+	<hr>
+
+	<hr>
+	<table align=center width=1000px>
+		<center><h1>Techinical Details</h1></center>
+		<tr>
+			<td><a href=""><img class="layered-paper-big" style="height:175px" src="./resources/paper.jpg"/></a></td>
+			<td><span style="font-size:12pt">Z.H. Wen, Z.C. Liu, S. Sridhar, R. Fu.<br>
+				<b>AnyHome: Open-Vocabulary Generation of Structured and Textured 3D Homes.</b><br>
+				(hosted on <a href="https://arxiv.org/abs/2211.01427">ArXiv</a>)<br>
+				<!-- (<a href="./resources/camera-ready.pdf">camera ready</a>)<br> -->
+				<span style="font-size:4pt"><a href="https://arxiv.org/abs/2211.01427"><br></a>
+				</span>
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<table align=center width=600px>
+		<tr>
+			<td><span style="font-size:14pt"><center>
+				<a href="./resources/bibtex.txt">[Bibtex]</a>
+			</center></td>
+		</tr>
+	</table>
+	<hr>
+	<br>
+
+	<table align=center width=900px>
+		<tr>
+			<td width=400px>
+				<left>
+					<!-- <center><h1>Acknowledgements</h1></center> -->
+					This template was originally made by <a href="http://web.mit.edu/phillipi/">Phillip Isola</a> and <a href="http://richzhang.github.io/">Richard Zhang</a> for a <a href="http://richzhang.github.io/colorization/">colorful</a> ECCV project; the code can be found <a href="https://github.com/richzhang/webpage-template">here</a>.
+				</left>
+			</td>
+		</tr>
+	</table>
+
+<br>
+</body>
+</html>
+
