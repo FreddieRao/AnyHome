@@ -223,20 +223,16 @@
 		<center><h1>Abstract</h1></center>
 		We introduce AnyHome, a framework that translates open-vocabulary descriptions, ranging from simple labels to elaborate paragraphs, into well-structured and textured 3D indoor scenes at a house-scale. Inspired by cognition theories, AnyHome employs an amodal structured representation to capture 3D spatial cues from textual narratives and then uses egocentric inpainting to enrich these scenes. To this end, we begin by using specially designed template prompts for Large Language Models (LLMs), which enable precise control over the textual input. We then utilize intermediate representations to maintain the spatial structure's consistency, ensuring that the 3D scenes align closely with the textual description. Then, we apply a Score Distillation Sampling process to refine the placement of objects. Lastly, an egocentric inpainting process is incorporated to enhance the realism and appearance of the scenes. AnyHome stands out due to its hierarchical structured representation combined with the versatility of open-vocabulary text interpretation. This allows for extensive customization of indoor scenes at various levels of granularity. We demonstrate that AnyHome can reliably generate a range of diverse indoor scenes, characterized by their detailed spatial structures and textures, all corresponding to the free-form textual inputs.
 		<tr>
-			<br>
-			<br>
-			<td><center>
-				<video width="450px" autoplay="autoplay" loop controls muted>
-				<source src="./resources/results/layout.mp4" type="video/mp4">
-				Your browser does not support the video tag.
-				</video>
-			</center></td>
-			<td><center>
-				<video width="450px" autoplay="autoplay" loop controls muted>
-				<source src="./resources/results/inpaint.mp4" type="video/mp4">
-				Your browser does not support the video tag.
-				</video>
-			</center></td>
+			<td align=center width=450px>
+				<center>
+					<img class="round" style="width:400" src="./resources/results/layout.gif"/>
+				</center>
+			</td>
+			<td align=center width=450px>
+				<center>
+					<img class="round" style="width:400" src="./resources/results/inpaint.gif"/>
+				</center>
+			</td>
 		</tr>
 		<tr>
 			<td align=center width=450px>
